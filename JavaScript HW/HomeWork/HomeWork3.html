@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork3</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        //作業三
+
+        let temp = 0;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let areas = document.querySelectorAll("area");
+            console.log(areas);
+            for (let area of areas) {
+                area.addEventListener("mouseover", mouseOver);
+                area.addEventListener("mouseout", mouseOut);
+                area.addEventListener("click", Click);
+                area.addEventListener("dblclick", dblClick);
+
+
+            }
+        });
+
+
+        //滑入
+        function mouseOver() {
+            if (document.querySelector("#idImg2")) {
+
+            } else {
+
+                let theNode = document.querySelector("#idImg2");
+                document.images[0].src = `images/${this.id}.png`;
+                document.getElementById("picp").innerHTML = `評分為...${this.id.substr(4)}顆星`
+                theNode.setAttribute("src", `images/${this.id}.png`);
+               
+
+            }
+        }
+
+        //滑出  
+        function mouseOut() {
+            if (document.querySelector("#imgMap")) {
+                document.images[0].src = "images/starss.png";
+                document.getElementById("picp").innerHTML = "評分為..."
+                temp++;
+            } else {
+
+                if (temp == 0) {
+
+                    let theNode = document.querySelector("#idImg2");
+                    theNode.setAttribute("src", `images/${this.id}.png`);
+
+
+
+                    document.getElementById("picp").innerHTML = `您給了${this.id.substr(4)}顆星`
+                } else { }
+
+            }
+        }
+
+        //單擊星星
+        function Click() {
+            let theNode = document.querySelector("#imgMap");
+            theNode.setAttribute("id", "idImg2")
+
+        }
+
+        //雙擊星星
+        function dblClick() {
+
+            if (document.querySelector("#idImg2")) {
+
+                let theNode = document.querySelector("#idImg2");
+                theNode.setAttribute("id", "imgMap")
+                theNode.setAttribute("src", `images/starss.png`);
+
+                document.getElementById("picp").innerHTML = `評分為...`
+
+            }
+        }
+
+    </script>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <h2>HomeWork 3</h2>
+
+
+            <a class="title" href="HomeWork1.html">HomeWork 1 </a></li>
+            <a class="title" href="HomeWork2.html">HomeWork 2 </a></li>
+            <a class="title" href="HomeWork3.html">HomeWork 3 </a></li>
+            <a class="title" href="HomeWork4.html">HomeWork 4 </a></li>
+
+
+        </header>
+
+
+
+        <!-- 作業三 -->
+
+        <div >
+
+
+            <img id="imgMap" src="images/starss.png" usemap="#FPMap0">
+
+            <map id="FPMap0" name="FPMap0">
+                <area id="star1" class="stars" coords="44,7,32,22,9,28,22,53,23,65,41,61,65,73,72,31" shape="poly">
+                <area id="star2" class="stars"
+                    coords="120,6,107,26,89,30,107,50,105,69,118,60,141,72,136,54,152,34,130,30" shape="poly">
+                <area id="star3" class="stars"
+                    coords="201,6,185,27,168,31,182,49,182,66,200,61,216,68,217,47,231,29,213,30" shape="poly">
+                <area id="star4" class="stars"
+                    coords="278,7,270,26,249,34,268,50,263,66,269,58,279,58,301,74,293,54,313,32,291,26" shape="poly">
+                <area id="star5" class="stars"
+                    coords="357,9,349,22,326,29,340,47,337,71,357,56,377,69,375,53,390,34,370,26" shape="poly">
+            </map>
+        </div>
+
+        <div id="divp">
+            <p>單擊星星可評分，雙擊星星重置</p>
+            <p id="picp">評分為...</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

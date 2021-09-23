@@ -1,0 +1,40 @@
+body {
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: bisque;
+    line-height: 1.5em;
+}
+
+header {
+    background: cadetblue;
+    color:black;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#container{
+    width: 90%;
+    margin:auto;
+    padding:10px;
+    text-align: center;
+}
+
+.title{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 30px 50px;
+    
+    }
+
+.title:hover{
+    color: chartreuse;
+}
+
+h2{
+    color: rgb(0, 0, 0);
+    margin: 20px 50px;
+}
+
+
+
+

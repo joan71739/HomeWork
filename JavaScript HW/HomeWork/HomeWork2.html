@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork2</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+
+        //作業二
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("account").addEventListener("blur", nameblur);
+            document.getElementById("pwd").addEventListener("blur", pwdblur);
+            document.getElementById("date").addEventListener("blur", dateblur);
+        });
+
+
+
+        //檢核作業二_姓名
+        document.getElementById("account").onblur = nameblur;
+        function nameblur() {
+            let theNamObj = document.getElementById("account");
+            let theNamObjVal = theNamObj.value;
+            let sp = document.getElementById("namesp");
+            let theNamObjValLen = theNamObjVal.length;
+            let flag = false;
+
+            if (theNamObjVal == "") {
+                sp.innerHTML = "<img src='images/error.png'><i style='color:red; font-size:10px;'>不可為空白</i>";
+            } else if (theNamObjValLen >= 2) {
+                for (let i = 0; i < theNamObjValLen; i++) {
+                    let ch = theNamObjVal.charAt(i);
+                    var reg = /^[\u4E00-\u9FA5]+$/;
+                    if (reg.test(ch)) {
+                        flag = true;
+                        console.log(ch)
+                    } else {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag) {
+                    sp.innerHTML = "<img src='images/ok.png'><span style='color:green; font-size:10px'>正確</span>";
+                } else {
+                    sp.innerHTML = "<img src='images/error.png'><i style='color:red; font-size:10px'>必須全部為中文字</i>"
+                }
+            } else {
+                sp.innerHTML = "<img src='images/error.png'><i style='color:red; font-size:10px'>至少兩個字以上</i>"
+            }
+        }
+
+
+        //檢核作業二_密碼
+        document.getElementById("pwd").onblur = pwdblur;
+        function pwdblur() {
+            let thePwdObj = document.getElementById("pwd");
+            let thePwdObjVal = thePwdObj.value;
+            let sp = document.getElementById("pwdsp");
+            let thePwdObjValLen = thePwdObjVal.length;
+            let flag1 = false, falg2 = false, flag3 = false;
+
+
+            if (thePwdObjVal == "") {
+                sp.innerHTML = "<img src='images/error.png'><i style='color:red; font-size:10px;'>不可為空白</i>"
+            } else if (thePwdObjValLen >= 6) {
+                for (let i = 0; i < thePwdObjValLen; i++) {
+                    let ch = thePwdObjVal.charAt(i).toUpperCase();
+                    if (ch >= "A" && ch <= "Z")
+                        flag1 = true;
+                    else if (ch >= "0" && ch <= "9")
+                        flag2 = true;
+                    else if (ch == "!" || "@" || "#" || "$" || "%" || "^" || "&" || "*")
+                        flag3 = true
+
+                    if (flag1 && flag2 && flag3) break;
+                }
+
+                if (flag1 && flag2 && flag3)
+                    sp.innerHTML = "<img src='images/ok.png'><span style='color:green; font-size:10px'>正確</span>";
+                else
+                    sp.innerHTML = "<img src='images/error.png'><i style='color:red; font-size:10px'>錯誤</i>"
+            } else {
+                sp.innerHTML = "<img src='images/error.png'><i style='color:red; font-size:10px'>請輸入至少6個字</i>"
+            }
+        }
+
+
+        //檢核作業二_日期
+        document.getElementById("date").onblur = dateblur;
+        function dateblur() {
+            let theDateObj = document.getElementById("date");
+            let theDateObjVal = theDateObj.value;
+            let sp = document.getElementById("datesp");
+
+            var dateObj = theDateObjVal.split('-');
+
+            var limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            var theYear = parseInt(dateObj[0]);
+            var theMonth = parseInt(dateObj[1]);
+            var theDate = parseInt(dateObj[2]);
+            let isLeep = new Date(`${theYear}/02/29`).getDate();//是否為閏年
+
+            if (isLeep === 29) {
+                limitInMonth[1] = 29;
+            }
+
+            if (theDate <= limitInMonth[theMonth - 1]) {
+                sp.innerHTML = "<img src='images/ok.png'><span style='color:green; font-size:10px'>正確</span>";
+            } else {
+                sp.innerHTML = "<img src='images/error.png'><i style='color:red; font-size:10px'>錯誤 ! 此日期不存在</i>"
+            }
+        }
+
+
+    </script>
+
+
+    <style>
+        /*共同樣式*/
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            margin: 10px 0 0 10px;
+        }
+
+
+        /*Hw2 樣式*/
+        .form {
+            width: 450px;
+            border-bottom: 3px dashed rgb(206, 201, 201);
+            margin: 20px ;
+            padding-bottom: 12px;
+            
+
+
+        }
+
+        .sub {
+            width: 450px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .formt1 {
+            width: 100px;
+            float: left;
+            text-align: right;
+        }
+
+        .p1 {
+            font-size: 10px;
+            color: grey;
+            clear: both;
+            margin: 10px 0 0 50px;
+        }
+
+
+        fieldset {
+            width: 500px;
+            border: 5px double palevioletred;
+            border-radius: 10px;
+            margin: 10px auto;;
+        }
+
+        legend {
+            color: rgb(37, 35, 35);
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: x-large;
+            margin-left: 25px;
+
+
+
+        }
+
+        #account,#pwd,#date{
+            float: left;
+        }
+
+        
+    </style>
+
+</head>
+
+
+<body>
+
+    <div id="container">
+
+        <header>
+            <h2>HomeWork 2</h2>
+
+
+            <a class="title" href="HomeWork1.html">HomeWork 1 </a></li>
+            <a class="title" href="HomeWork2.html">HomeWork 2 </a></li>
+            <a class="title" href="HomeWork3.html">HomeWork 3 </a></li>
+            <a class="title" href="HomeWork4.html">HomeWork 4 </a></li>
+
+
+        </header>
+
+        
+        <!-- 作業二 -->
+        <form action='#' method='get' enctype='multipart/form-data'>
+            <fieldset>
+                <legend>form check</legend>
+                <div class="form">
+                    <label for="account" class="formt1">姓名：</label>
+                    <input type="text" id="account" name="account" size="10" autofocus placeholder="花橘子">
+                    <span id="namesp"></span><br />
+                    <p class="p1">( 1.不可空白 2.至少兩個字以上 3.必須全部為中文字 )</p>
+                </div>
+
+                <div class="form">
+                    <label for="pwd" class="formt1">密碼：</label>
+                    <input type="password" id="pwd" name="pwd" maxlength="10" required>
+                    <span id="pwdsp"></span><br />
+                    <p class="p1">( 1.不可空白 2.至少6個字並且必須包含英數字及特殊字元[!@#$%^&*]) )</p>
+                </div>
+
+                <div class="form">
+                    <label for="date" class="formt1">日期：</label>
+                    <input type="date" id="date" name="date">
+                    <span id="datesp"></span><br />
+                    <p class="p1">( 格式:西元年/月/日(yyyy/mm/dd))
+                </div>
+
+                <div class="sub">
+                    <input type="submit" value="送出">
+                    <input type="reset" value="清除">
+
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+
+
+
+</body>
+
+</html>

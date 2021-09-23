@@ -1,0 +1,102 @@
+package HW1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Demo3CreateStatement {
+	
+	private Connection conn;
+	
+	// 開連線
+		public void createConn() throws Exception {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			String urlString = "jdbc:sqlserver://localhost:1433;databaseName=JDBCDemoDB;user=sa;password=1234";
+			
+			conn = DriverManager.getConnection(urlString);
+			
+			boolean status = !conn.isClosed();
+			
+			if(status) {
+				System.out.println("Connection Open status: " + status);
+			}
+			
+		}
+	
+		
+		// 關連線
+		public void closeConn() throws Exception {
+			if(conn != null) {
+				conn.close();
+				System.out.println("Close connection!!");
+			}
+		}
+		
+		
+		/*第一題1. 方法 updateDataHW () : 請把 1001 這筆資料的價錢改為 15 ，成功要印出
+		           Update Product Success。*/
+		public void updateDataHW() throws SQLException {
+			String sqlStr = "Update Product Set productprice = 15 where productid = 1001 ";
+			Statement state = conn.createStatement();
+			int row = state.executeUpdate(sqlStr);
+			System.out.println("Update product success: " + row + "筆資料");
+			
+			state.close();
+		}
+		
+		
+		/*2. 方法 insertDataHW () 請薪資一筆商品資料名為 Mac mini ，其他欄位自訂，成
+              功要印出 Insert Product Success 。  */
+		public void insertDataHW() throws SQLException {
+			String sqlStr = "Insert into Product(productid, productname, productprice, productdate, remark)"+
+		     "Values(2020, 'Mac mini', 50000, '2021-05-31', 'Apple')";
+			Statement state = conn.createStatement();
+			state.execute(sqlStr);
+			System.out.println("Insert Product Success");
+			
+			state.close();
+		}
+		
+		
+		/*3. 方法 deleteOneDataHW 請刪除名稱為 mask 的這筆資料，成功要印出
+              Delete Product Success 。 */
+		
+		public  void deleteOneDateHW() throws SQLException {
+			String sqlStr = "Delete Product Where productname = 'mask'";
+			Statement state = conn.createStatement();
+			state.executeUpdate(sqlStr);
+			System.out.println("Delete Product Success");
+			state.close();
+		}
+		
+	
+	
+
+	public static void main(String[] args) {
+		
+		Demo3CreateStatement demo3 = new Demo3CreateStatement();
+		
+		try {
+			demo3.createConn();
+//			demo3.updateDataHW();//第一題
+//			demo3.insertDataHW();//第二題
+//			demo3.deleteOneDateHW();//第三題
+			
+		}catch(Exception e) {
+			System.out.println("Something Wrong!!!");
+			e.printStackTrace();
+			
+		}finally {
+			try {
+				demo3.closeConn();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	
+	
+}

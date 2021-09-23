@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork4</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /*共同樣式*/
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            margin: 10px 0 0 10px;
+        }
+
+        .block {
+            width: 380PX;
+            height: 280px;
+            display: block;
+            cursor: pointer;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .field {
+            width: 380PX;
+            margin: 0 auto;
+            border-radius: 20PX;
+            padding: 10px 15px;
+
+        }
+
+        .legend {
+            text-align: center;
+            font-size: 25px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+        }
+
+        .ads {
+            margin: 6PX 5PX;
+            width: 60PX;
+            height: 60PX;
+        }
+
+        .adsborder {
+            margin: 3PX 2PX;
+            width: 60PX;
+            height: 60PX;
+            border: 3px solid #ffc300;
+        }
+
+        .pdiv {
+            margin: 10px;
+            width: 380PX;
+            text-align: center;
+        }
+
+        .control {
+            margin-left: 30px;
+            margin-right: 30px;
+            width: 40px;
+
+        }
+
+        .control:hover {
+            width: 50px;
+        }
+    </style>
+
+
+    <script>
+
+
+        //小圖滑入及滑出方法
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let imgs = document.querySelectorAll("#smal")[0].getElementsByTagName("img");
+            for (i = 0; i < imgs.length; i++) {
+                imgs[i].addEventListener("mouseover", mouseOver);
+                
+            }
+
+            document.getElementById("idpauseplay").addEventListener("click", idPauseplay);
+            document.getElementById("idback").addEventListener("click", idBack);
+            document.getElementById("idnext").addEventListener("click", idNext);
+
+
+            function mouseOver() {
+                //小圖
+                for (i = 0; i < imgs.length; i++) {
+                    if (i == `${this.id.charAt(3)}`) {
+                        imgs[i].className = "adsborder";
+                    } else {
+                        imgs[i].className = "ads";
+                    }
+
+                }
+
+                //大圖
+                let bigs = document.querySelectorAll("#big")[0].getElementsByTagName("img");
+
+                for (i = 0; i < bigs.length; i++) {
+                    if (i == `${this.id.charAt(3)}`) {
+                        bigs[i].className = "block"
+                    } else {
+                        bigs[i].className = "none"
+                    }
+
+                }
+            }
+
+            //自動輪播、按鍵按鈕
+            let t = window.setInterval(f, 1000);
+            let run = true;
+            let a = 0;
+
+            //自動播放a參數
+
+            function f() {
+                if (a > 4) {
+                    a = 0;
+                }
+
+                play();
+                a++;
+            }
+
+            //自動播放
+
+            function play() {
+                for (i = 0; i < 5; i++) {
+                    if (i == a) {
+                        imgs[i].className = "adsborder";
+                    } else {
+                        imgs[i].className = "ads";
+                    }
+
+                }
+
+                let bigs = document.querySelectorAll("#big")[0].getElementsByTagName("img");
+
+                for (i = 0; i < 5; i++) {
+                    if (i == a) {
+                        bigs[i].className = "block"
+                    } else {
+                        bigs[i].className = "none"
+                    }
+
+                }
+            }
+
+
+            //暫停播放
+            function idPauseplay() {
+                if (run) {
+                    window.clearInterval(t);
+                    run = false;
+                    document.getElementById("idpauseplay").src = `images/play.png`;
+                } else {
+                    document.getElementById("idpauseplay").src = `images/icons8-pause-64.png`;
+                    t = window.setInterval(f, 1000);
+                    run = true;
+                }
+            }
+
+            //下一張
+            function idNext() {
+                a++;
+                if (a > 4) {
+                    a = 0;
+                }
+                play();
+                if (run) {
+                    idPauseplay();
+                }
+            }
+
+            //上一張
+            function idBack() {
+                a--;
+                if (a < 0) {
+                    a = 4;
+                }
+                play();
+                if (run) {
+                    idPauseplay();
+                }
+            }
+        });
+    </script>
+</head>
+
+
+
+<body>
+
+    <!-- 作業四 -->
+    <div id="container">
+        <header>
+            <h2>HomeWork 4</h2>
+
+
+            <a class="title" href="HomeWork1.html">HomeWork 1 </a></li>
+            <a class="title" href="HomeWork2.html">HomeWork 2 </a></li>
+            <a class="title" href="HomeWork3.html">HomeWork 3 </a></li>
+            <a class="title" href="HomeWork4.html">HomeWork 4 </a></li>
+
+
+
+
+        </header>
+
+        <fieldset class="field">
+            <legend class="legend">Discovery</legend>
+            <div class="pdiv" id="big">
+                <a href="https://zh-tw.zekkeijapan.com/area/index/9/"><img id="ad10" class="block"
+                        src="/HomeWork/images/001.jpg"></a>
+                <a href="https://officesnapshots.com/photos/"><img id="ad11" class="none"
+                        src="/HomeWork/images/002.jpg"></a>
+                <a href="https://www.japan.travel/hk/hk/"><img id="ad12" class="none"
+                        src="/HomeWork/images/003.jpg"></a>
+                <a href="https://www.pc.gc.ca/en/index"><img id="ad13" class="none" src="/HomeWork/images/004.jpg"></a>
+                <a href="https://www.settour.com.tw/act/gfg/china/tibet/"><img id="ad14" class="none"
+                        src="/HomeWork/images/005.jpg"></a>
+
+            </div>
+            <hr>
+            <div class="pdiv" id="smal">
+                <img id="sa20" class="ads" src="/HomeWork/images/001.jpg">
+                <img id="sa21" class="ads" src="/HomeWork/images/002.jpg">
+                <img id="sa22" class="ads" src="/HomeWork/images/003.jpg">
+                <img id="sa23" class="ads" src="/HomeWork/images/004.jpg">
+                <img id="sa24" class="ads" src="/HomeWork/images/005.jpg">
+            </div>
+
+            <hr>
+
+            <div class="pdiv" id="icon">
+                <img id="idback" class="control" src="/HomeWork/images/back.png">
+                <img id="idpauseplay" class="control" src="/HomeWork/images/icons8-pause-64.png">
+                <img id="idnext" class="control" src="/HomeWork/images/next.png">
+            </div>
+        </fieldset>
+
+    </div>
+
+
+</body>
+
+</html>

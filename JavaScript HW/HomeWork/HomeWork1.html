@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeWork1</title>
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+       
+        /*Hw1 樣式*/
+        caption {
+            font-size: larger;
+            line-height: 35px;
+            font-weight: bold;
+        }
+
+        .tb {
+            width: 600px;
+            height: 300px;
+            border: 2px double rgb(255, 16, 16);
+            border-collapse: collapse;
+            margin: 10px auto;
+
+
+        }
+
+        .td {
+            border-right: 1px solid rgb(0, 0, 0);
+        }
+
+        .tbody {
+            background-color: rgb(235, 182, 173);
+            text-align: center;
+
+        }
+
+        
+    </style>
+
+</head>
+
+
+<body>
+    <div id="container">
+        <header>
+            <h2>HomeWork 1</h2>
+
+
+            <a class="title" href="HomeWork1.html">HomeWork 1 </a></li>
+            <a class="title" href="HomeWork2.html">HomeWork 2 </a></li>
+            <a class="title" href="HomeWork3.html">HomeWork 3 </a></li>
+            <a class="title" href="HomeWork4.html">HomeWork 4 </a></li>
+
+
+
+
+        </header>
+
+        <!-- 作業一 -->
+        
+
+            <script>
+                document.write("<table class='tb'>");
+                document.write("<caption>九九乘法表</caption>");
+
+                document.write("<tbody class='tbody'>")
+                for (let i = 1; i < 10; i++) {
+                    document.write("<tr>");
+                    for (let j = 2; j < 10; j++) {
+                        document.write("<td class='td'>" + j + "*" + i + "=" + i * j + "</td>");
+                    }
+                    document.write("</tr>");
+                }
+                document.write("</tbody>")
+                document.write("</table>");
+            </script>
+        
+
+
+
+    </div>
+
+
+</body>
+
+</html>
